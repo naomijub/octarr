@@ -1,4 +1,3 @@
-
 pub struct OctNode<T> {
     pub data: T,
     pub sub_nodes: Vec<OctNode<T>>,
@@ -6,13 +5,12 @@ pub struct OctNode<T> {
     pub size: u64,
 }
 
-impl OctNode<T> {
+impl<T> OctNode<T> {
     pub fn is_leaf(&self) -> bool {
         self.sub_nodes.is_empty()
     }
 
-    pub fn half_size(&self) -> u64 {
+    pub const fn half_size(&self) -> u64 {
         self.size / 2
     }
 }
-

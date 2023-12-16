@@ -1,7 +1,7 @@
 use bit_vec::BitVec;
 
 pub struct BitArray {
-    bits: BitVec<3, bool>
+    bits: BitVec<u32>,
 }
 
 impl BitArray {
