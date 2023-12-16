@@ -1,10 +1,10 @@
 use bit_vec::BitVec;
 
-pub struct BitArray {
+pub struct Octant {
     bits: BitVec<u32>,
 }
 
-impl BitArray {
+impl Octant {
     pub fn x(&self) -> u8 {
         if self.bits[0] {
             1
