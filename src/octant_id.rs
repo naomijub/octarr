@@ -1,10 +1,24 @@
 use bit_vec::BitVec;
 
-pub struct Octant {
+pub struct OctantId {
     bits: BitVec<u32>,
 }
 
-impl Octant {
+impl OctantId {
+    pub fn new() -> Self {
+        Self {
+            bits: BitVec::from_elem(3, false),
+        }
+    }
+
+    pub fn with_index(index: usize) -> Self {
+        let mut bits = BitVec::from_elem(3, false);
+        for i in 0..3 {
+            bits.set(i, (index & (1 << i)) != 0);
+        }
+        Self { bits }
+    }
+
     pub fn x(&self) -> u8 {
         if self.bits[0] {
             1
@@ -36,5 +50,15 @@ impl Octant {
         inverse.set(2, !self.bits[2]);
 
         Self { bits: inverse }
+    }
+
+    pub fn to_numeral(&self) -> usize {
+        let mut result = 0;
+        for i in 0..3 {
+            if self.bits[i] {
+                result |= 1 << i;
+            }
+        }
+        result
     }
 }

@@ -1,4 +1,4 @@
-use crate::octant_id::Octant;
+use crate::octant_id::OctantId;
 
 pub struct OctNode<T> {
     pub data: T,
@@ -20,7 +20,7 @@ impl<T> OctNode<T> {
 
     pub fn remove_leafs(&mut self, recursive: bool) {}
 
-    pub fn get_octant_at(&self, position: [i128; 3]) -> Octant {
+    pub fn get_octant_at(&self, position: [i128; 3]) -> OctantId {
         todo!()
     }
 }
