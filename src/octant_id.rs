@@ -4,11 +4,25 @@ pub struct OctantId {
     bits: BitVec<u32>,
 }
 
+impl Default for OctantId {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl OctantId {
     pub fn new() -> Self {
         Self {
             bits: BitVec::from_elem(3, false),
         }
+    }
+
+    pub fn set_true(&mut self, index: usize) {
+        self.bits.set(index, true)
+    }
+
+    pub fn flip_at(&mut self, index: usize) {
+        self.bits.set(index, !self.bits[index])
     }
 
     pub fn with_index(index: usize) -> Self {
