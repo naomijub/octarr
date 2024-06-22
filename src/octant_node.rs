@@ -19,6 +19,14 @@ impl<T: Send + Clone> OctNode<T> {
         }
     }
 
+    pub fn len(&self) -> usize {
+        1 + self.sub_nodes.iter().map(|node| node.len()).reduce(|acc, len| acc + len).unwrap_or_default()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+
     pub fn set(&mut self, node: &mut Self) {
         std::mem::swap(self, node);
     }
