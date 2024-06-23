@@ -6,7 +6,7 @@ description = "Octarr is a dynamic cubic octree capable of storing class data, a
 readme = "README.md"
 documentation = "https://docs.rs/octarr/"
 repository = "https://github.com/naomijub/octarr"
-keywords = ["Octarr", "cubic octree", "voxel",]
+keywords = ["Octarr", "cubic-octree", "voxel",]
 license = "MIT"
 edition = "2021"
 
