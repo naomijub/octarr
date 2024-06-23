@@ -1,7 +1,9 @@
 use crate::octant_id::OctantId;
+#[cfg(feature = "parallel")]
 use rayon::prelude::*;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OctNode<T: Send + Clone> {
     pub data: Option<T>,
     pub sub_nodes: Vec<OctNode<T>>,
@@ -52,9 +54,16 @@ impl<T: Send + Clone> OctNode<T> {
             }
         }
 
+        #[cfg(feature = "parallel")]
         if amount > 1 {
             self.sub_nodes
                 .par_iter_mut()
+                .for_each(|node| node.subdivide(amount - 1));
+        }
+        #[cfg(not(feature = "parallel"))]
+        if amount > 1 {
+            self.sub_nodes
+                .iter_mut()
                 .for_each(|node| node.subdivide(amount - 1));
         }
     }
@@ -64,9 +73,16 @@ impl<T: Send + Clone> OctNode<T> {
             return;
         }
 
+        #[cfg(feature = "parallel")]
         if recursive {
             self.sub_nodes
                 .par_iter_mut()
+                .for_each(|node| node.remove_leaves(true));
+        }
+        #[cfg(not(feature = "parallel"))]
+        if recursive {
+            self.sub_nodes
+                .iter_mut()
                 .for_each(|node| node.remove_leaves(true));
         }
 

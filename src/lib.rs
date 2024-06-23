@@ -1,10 +1,12 @@
 use octant_id::OctantId;
 use octant_node::OctNode;
+use serde::{Deserialize, Serialize};
 
 pub mod octant_id;
 pub mod octant_node;
 pub type Point = [i128; 3];
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Octarr<T: Send + Clone> {
     root: OctNode<T>,
 }
@@ -143,10 +145,7 @@ impl<T: Send + Clone> Octarr<T> {
             self.root.position[2] + (self.root.len() / 4) as i128,
         ];
         let mut new_node = self.root.new(new_pos, (self.root.len() / 2) as u64);
-        new_node.sub_nodes = inner_subnodes
-            .into_iter()
-            .map(ToOwned::to_owned)
-            .collect();
+        new_node.sub_nodes = inner_subnodes.into_iter().map(ToOwned::to_owned).collect();
         new_node.remove_leaves(recursive);
 
         self.root = new_node;

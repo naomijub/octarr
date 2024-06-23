@@ -1,6 +1,7 @@
 use bit_vec::BitVec;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OctantId {
     bits: BitVec<u32>,
 }
