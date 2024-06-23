@@ -20,7 +20,12 @@ impl<T: Send + Clone> OctNode<T> {
     }
 
     pub fn len(&self) -> usize {
-        1 + self.sub_nodes.iter().map(|node| node.len()).reduce(|acc, len| acc + len).unwrap_or_default()
+        1 + self
+            .sub_nodes
+            .iter()
+            .map(|node| node.len())
+            .reduce(|acc, len| acc + len)
+            .unwrap_or_default()
     }
 
     pub fn is_empty(&self) -> bool {

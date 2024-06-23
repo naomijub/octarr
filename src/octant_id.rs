@@ -1,5 +1,6 @@
 use bit_vec::BitVec;
 
+#[derive(Debug, Clone)]
 pub struct OctantId {
     bits: BitVec<u32>,
 }
