@@ -90,7 +90,7 @@ impl<T: Send + Clone> Octarr<T> {
     }
 
     pub fn optimize(&mut self) {
-        self.root.remove_leafs(true);
+        self.root.remove_leaves(true);
         self.shrink(true);
     }
 
@@ -147,7 +147,7 @@ impl<T: Send + Clone> Octarr<T> {
             .into_iter()
             .map(ToOwned::to_owned)
             .collect();
-        new_node.remove_leafs(recursive);
+        new_node.remove_leaves(recursive);
 
         self.root = new_node;
     }

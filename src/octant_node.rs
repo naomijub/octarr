@@ -59,7 +59,7 @@ impl<T: Send + Clone> OctNode<T> {
         }
     }
 
-    pub fn remove_leafs(&mut self, recursive: bool) {
+    pub fn remove_leaves(&mut self, recursive: bool) {
         if self.is_leaf() {
             return;
         }
@@ -67,7 +67,7 @@ impl<T: Send + Clone> OctNode<T> {
         if recursive {
             self.sub_nodes
                 .par_iter_mut()
-                .for_each(|node| node.remove_leafs(true));
+                .for_each(|node| node.remove_leaves(true));
         }
 
         for node in &self.sub_nodes {
